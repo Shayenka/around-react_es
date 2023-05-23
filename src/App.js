@@ -1,23 +1,144 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+import PopupWithForm from "./components/PopupWithForm.js";
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isconfirmDeleteCardPopupOpen, setIsconfirmDeleteCardPopupOpen] =
+    useState(false);
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsconfirmDeleteCardPopupOpen(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="body">
+      <div className="page">
+        <Header />
+        <Main
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+        />
+        {isEditProfilePopupOpen && (
+          <PopupWithForm
+            name="editProfile"
+            title="Editar perfil"
+            submitButtonText="Guardar"
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+          >
+            <div>
+              <input
+                type="text"
+                id="name"
+                placeholder="Nombre"
+                className="popup__text"
+                required
+                minLength="2"
+                maxLength="40"
+              />
+              <span className="popup__input-error" id="name-error"></span>
+              <input
+                type="text"
+                id="about"
+                placeholder="Acerca de mí"
+                className="popup__text"
+                required
+                minLength="2"
+                maxLength="200"
+              />
+              <span className="popup__input-error" id="about-error"></span>
+            </div>
+          </PopupWithForm>
+        )}
+        {isEditAvatarPopupOpen && (
+          <PopupWithForm
+            name="changeAvatar"
+            title="Actualizar foto de perfil"
+            submitButtonText="Guardar"
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+          >
+            <div>
+              <input
+                type="url"
+                id="linkAvatar"
+                name="link"
+                placeholder="URL de la foto de perfil"
+                className="popup__text"
+                required
+              />
+              <span className="popup__input-error" id="linkAvatar-error"></span>
+            </div>
+          </PopupWithForm>
+        )}
+        {isAddPlacePopupOpen && (
+          <PopupWithForm
+            name="addCard"
+            title="Nuevo lugar"
+            submitButtonText="Crear"
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+          >
+            <div>
+              <input
+                type="text"
+                id="titulo"
+                name="name"
+                placeholder="Titulo"
+                className="popup__text"
+                required
+                minLength="2"
+                maxLength="30"
+              />
+              <span className="popup__input-error" id="titulo-error"></span>
+              <input
+                type="url"
+                id="enlace"
+                name="link"
+                placeholder="URL de la imagen"
+                className="popup__text"
+                required
+              />
+              <span className="popup__input-error" id="enlace-error"></span>
+            </div>
+          </PopupWithForm>
+        )}
+        {isconfirmDeleteCardPopupOpen && (
+          <PopupWithForm
+            name="confirmDeleteCard"
+            title="¿Estás seguro?"
+            submitButtonText="Sí"
+            isOpen={isconfirmDeleteCardPopupOpen}
+            onClose={closeAllPopups}
+          >
+            {" "}
+            <div></div>
+          </PopupWithForm>
+        )}
+        <Footer />
+      </div>
     </div>
   );
 }
