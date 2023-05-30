@@ -1,6 +1,8 @@
 class Api {
-  constructor() {
-    this.authorization = "3270d03d-8b4c-49a2-869b-f096d27af6a5";
+  constructor({ address, groupId, token }) {
+    this.authorization = token;
+    this.address = address;
+    this.groupId = groupId;
   }
 
   _useFetch(url, method, body) {
@@ -33,63 +35,7 @@ class Api {
       "https://around.nomoreparties.co/v1/web_es_05/cards",
       `GET`
     ).then((result) => {
-      return result;
-    });
-  }
-
-  editUserInfo(userData) {
-    return this._useFetch(
-      "https://around.nomoreparties.co/v1/web_es_05/users/me",
-      `PATCH`,
-      userData
-    ).then((result) => {
-      return result;
-    });
-  }
-
-  addNewCard(cardData) {
-    return this._useFetch(
-      "https://around.nomoreparties.co/v1/web_es_05/cards",
-      `POST`,
-      cardData
-    ).then((result) => {
-      return result;
-    });
-  }
-
-  addLike(cardId) {
-    return this._useFetch(
-      `https://around.nomoreparties.co/v1/web_es_05/cards/likes/${cardId}`,
-      `PUT`
-    ).then((result) => {
-      return result.likes;
-    });
-  }
-
-  removeLike(cardId) {
-    return this._useFetch(
-      `https://around.nomoreparties.co/v1/web_es_05/cards/likes/${cardId}`,
-      `DELETE`
-    ).then((result) => {
-      return result.likes;
-    });
-  }
-
-  deleteCard(cardId) {
-    return this._useFetch(
-      `https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`,
-      `DELETE`
-    ).then((result) => {
-      return result;
-    });
-  }
-
-  changeAvatarProfile(userAvatar) {
-    return this._useFetch(
-      "https://around.nomoreparties.co/v1/web_es_05/users/me/avatar",
-      `PATCH`,
-      userAvatar
-    ).then((result) => {
+      console.log(result);
       return result;
     });
   }
@@ -97,8 +43,8 @@ class Api {
 
 const api = new Api({
   address: "https://nomoreparties.co",
-  groupId: `web_es_05`, // CHANGE IT WITH YOUR COHORT
-  token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`, // CHANGE IT WITH YOUR TOKEN
+  groupId: `web_es_05`,
+  token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`,
 });
 
-export default api;
+export default Api;

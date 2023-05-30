@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import api from "../utils/api";
+import Api from "../utils/Api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
-import deleteCard from "../images/Papelera.svg";
-import likeCard from "../images/like.svg";
+import Card from "./Card.js";
 
 function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
   const [userName, setUserName] = useState("");
@@ -12,8 +11,7 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api
-      .getUserInfo()
+    Api.getUserInfo()
       .then((response) => {
         setUserName(response.name);
         setUserDescription(response.about);
@@ -23,10 +21,9 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
         console.log("Error al obtener los datos del usuario:", error);
       });
 
-    api
-      .getCards()
+    Api.getCards()
       .then((response) => {
-        setCards([response]);
+        setCards(response);
       })
       .catch((error) => {
         console.log("Error al obtener los datos de las tarjetas:", error);
@@ -70,31 +67,7 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
       <section className="elements">
         <div>
           {cards.map((card) => (
-            <div className="element" key={card._id}>
-              <img
-                className="element__delete"
-                src={deleteCard}
-                alt="Icono de papelera para eliminar"
-              />
-              <img
-                className="element__image"
-                id="src"
-                src={card.link}
-                alt={card.name}
-                style={{ backgroundImage: `url(${card.link})` }}
-              />
-              <div className="element__footer-photo">
-                <h3 className="element__title">{card.name}</h3>
-                <div className="likes-card">
-                  <img
-                    className="icon-like"
-                    src={likeCard}
-                    alt="Icono de corazón"
-                  />
-                  <span className="likes-card__count">{card.likes}</span>
-                </div>
-              </div>
-            </div>
+            <Card key={card._id} card={card} />
           ))}
         </div>
       </section>
