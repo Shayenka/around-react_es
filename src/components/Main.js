@@ -3,16 +3,38 @@ import Api from "../utils/Api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
 import Card from "./Card.js";
+import ImagePopup from "./ImagePopup.js";
 
-function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
+function Main({
+  onEditProfileClick,
+  onAddPlaceClick,
+  onEditAvatarClick,
+  onCardClick,
+}) {
   const [userName, setUserName] = useState("");
   const [userAbout, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  function onCardClick(cardInfo) {
+    setSelectedCard(cardInfo);
+  }
+
+  function onClose() {
+    setSelectedCard(null);
+  }
 
   useEffect(() => {
-    Api.getUserInfo()
+    const api = new Api({
+      address: "https://nomoreparties.co",
+      groupId: `web_es_05`,
+      token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`,
+    });
+    api
+      .getUserInfo()
       .then((response) => {
+        console.log(response);
         setUserName(response.name);
         setUserDescription(response.about);
         setUserAvatar(response.avatar);
@@ -21,7 +43,8 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
         console.log("Error al obtener los datos del usuario:", error);
       });
 
-    Api.getCards()
+    api
+      .getCards()
       .then((response) => {
         setCards(response);
       })
@@ -67,31 +90,13 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
       <section className="elements">
         <div>
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card key={card._id} card={card} onCardClick={onCardClick} />
           ))}
+          {selectedCard !== null && (
+            <ImagePopup selectedCard={selectedCard} onClose={onClose} />
+          )}
         </div>
       </section>
-
-      {/* <PopupWithForm
-        name="confirmDeleteCard"
-        title="¿Estás seguro?"
-        submitButtonText="Sí"
-      >
-        {" "}
-        <div></div>
-      </PopupWithForm> */}
-
-      {/* <section className="popup popup_closed" id="popupImage">
-        <div className="image-show">
-          <img
-            className="image-show__close-icon"
-            src={closePopUp}
-            alt="Icono de una X para cerrar imagen."
-          />
-          <img className="image-show__popup" src=" " alt="" />
-          <h3 className="image-show__title"></h3>
-        </div>
-      </section> */}
     </main>
   );
 }

@@ -35,16 +35,9 @@ class Api {
       "https://around.nomoreparties.co/v1/web_es_05/cards",
       `GET`
     ).then((result) => {
-      console.log(result);
       return result;
     });
   }
 }
-
-const api = new Api({
-  address: "https://nomoreparties.co",
-  groupId: `web_es_05`,
-  token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`,
-});
 
 export default Api;

@@ -40,6 +40,7 @@ function App() {
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
         />
+
         {isEditProfilePopupOpen && (
           <PopupWithForm
             name="editProfile"
