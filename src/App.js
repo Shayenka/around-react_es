@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import PopupWithForm from "./components/PopupWithForm.js";
+import ImagePopup from "./components/ImagePopup.js";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -11,6 +12,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isconfirmDeleteCardPopupOpen, setIsconfirmDeleteCardPopupOpen] =
     useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  function handleCardClick(cardInfo) {
+    setSelectedCard(cardInfo);
+  }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -29,6 +35,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsconfirmDeleteCardPopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -39,6 +46,7 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
+          handleCardClick={handleCardClick}
         />
 
         {isEditProfilePopupOpen && (
@@ -125,6 +133,9 @@ function App() {
               <span className="popup__input-error" id="enlace-error"></span>
             </div>
           </PopupWithForm>
+        )}
+        {selectedCard !== null && (
+          <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
         )}
         {isconfirmDeleteCardPopupOpen && (
           <PopupWithForm

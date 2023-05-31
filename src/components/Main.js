@@ -3,27 +3,17 @@ import Api from "../utils/Api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
 import Card from "./Card.js";
-import ImagePopup from "./ImagePopup.js";
 
 function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onEditAvatarClick,
-  onCardClick,
+  handleCardClick,
 }) {
   const [userName, setUserName] = useState("");
   const [userAbout, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
-
-  function onCardClick(cardInfo) {
-    setSelectedCard(cardInfo);
-  }
-
-  function onClose() {
-    setSelectedCard(null);
-  }
 
   useEffect(() => {
     const api = new Api({
@@ -90,11 +80,8 @@ function Main({
       <section className="elements">
         <div>
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={onCardClick} />
+            <Card key={card._id} card={card} onCardClick={handleCardClick} />
           ))}
-          {selectedCard !== null && (
-            <ImagePopup selectedCard={selectedCard} onClose={onClose} />
-          )}
         </div>
       </section>
     </main>

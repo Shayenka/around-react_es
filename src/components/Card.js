@@ -2,9 +2,9 @@ import deleteCard from "../images/Papelera.svg";
 import likeCard from "../images/like.svg";
 
 function Card({ card, onCardClick }) {
-  const handleClick = () => {
+  function handleClick() {
     onCardClick(card);
-  };
+  }
   return (
     <div className="element" key={card._id} onClick={handleClick}>
       <img
