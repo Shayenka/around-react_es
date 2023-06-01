@@ -78,11 +78,9 @@ function Main({
       </section>
 
       <section className="elements">
-        <div>
-          {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={handleCardClick} />
-          ))}
-        </div>
+        {cards.map((card) => (
+          <Card key={card._id} card={card} onCardClick={handleCardClick} />
+        ))}
       </section>
     </main>
   );
