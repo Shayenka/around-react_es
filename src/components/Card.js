@@ -6,7 +6,7 @@ function Card({ card, onCardClick }) {
     onCardClick(card);
   }
   return (
-    <div className="element" key={card._id} onClick={handleClick}>
+    <div className="element" key={card._id}>
       <img
         className="element__delete"
         src={deleteCard}
@@ -17,6 +17,7 @@ function Card({ card, onCardClick }) {
         src={card.link}
         alt={card.name}
         style={{ backgroundImage: `url(${card.link})` }}
+        onClick={handleClick}
       />
       <div className="element__footer-photo">
         <h3 className="element__title">{card.name}</h3>
