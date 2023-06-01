@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/%7Baround-react_es%7D/static/css/main.8406a77a.css",
+    "main.js": "/%7Baround-react_es%7D/static/js/main.39b41390.js",
+    "static/js/787.33e33395.chunk.js": "/%7Baround-react_es%7D/static/js/787.33e33395.chunk.js",
+    "static/media/logo.svg": "/%7Baround-react_es%7D/static/media/logo.50fce9df697a0797141191436383ff74.svg",
+    "static/media/like.svg": "/%7Baround-react_es%7D/static/media/like.3826c074a1b94b101e38893244f97c31.svg",
+    "index.html": "/%7Baround-react_es%7D/index.html",
+    "static/media/Papelera.svg": "/%7Baround-react_es%7D/static/media/Papelera.8cb59aa98088a1653f62c7e338721dde.svg",
+    "static/media/BlackLike.svg": "/%7Baround-react_es%7D/static/media/BlackLike.226461bd64622361ffb2.svg",
+    "static/media/CloseIcon.svg": "/%7Baround-react_es%7D/static/media/CloseIcon.61b629a4dc3574160af975b00e36fa91.svg",
+    "static/media/Edit.svg": "/%7Baround-react_es%7D/static/media/Edit.8667ac4a523e8fc42e59641845fc8448.svg",
+    "static/media/Signo+.svg": "/%7Baround-react_es%7D/static/media/Signo+.d86bb2edc2f6eadb96b785d29c82b56e.svg",
+    "main.8406a77a.css.map": "/%7Baround-react_es%7D/static/css/main.8406a77a.css.map",
+    "main.39b41390.js.map": "/%7Baround-react_es%7D/static/js/main.39b41390.js.map",
+    "787.33e33395.chunk.js.map": "/%7Baround-react_es%7D/static/js/787.33e33395.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8406a77a.css",
+    "static/js/main.39b41390.js"
+  ]
+}
