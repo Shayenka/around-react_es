@@ -10,7 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isconfirmDeleteCardPopupOpen, setIsconfirmDeleteCardPopupOpen] =
+  const [isConfirmDeleteCardPopupOpen, setIsConfirmDeleteCardPopupOpen] =
     useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -34,7 +34,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsconfirmDeleteCardPopupOpen(false);
+    setIsConfirmDeleteCardPopupOpen(false);
     setSelectedCard(null);
   }
 
@@ -137,12 +137,12 @@ function App() {
         {selectedCard !== null && (
           <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
         )}
-        {isconfirmDeleteCardPopupOpen && (
+        {isConfirmDeleteCardPopupOpen && (
           <PopupWithForm
             name="confirmDeleteCard"
             title="¿Estás seguro?"
             submitButtonText="Sí"
-            isOpen={isconfirmDeleteCardPopupOpen}
+            isOpen={isConfirmDeleteCardPopupOpen}
             onClose={closeAllPopups}
           >
             {" "}

@@ -40,4 +40,10 @@ class Api {
   }
 }
 
-export default Api;
+const api = new Api({
+  address: "https://nomoreparties.co",
+  groupId: `web_es_05`,
+  token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`,
+});
+
+export default api;

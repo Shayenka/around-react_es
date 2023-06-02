@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Api from "../utils/Api.js";
+import api from "../utils/api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
 import Card from "./Card.js";
@@ -11,22 +11,17 @@ function Main({
   handleCardClick,
 }) {
   const [userName, setUserName] = useState("");
-  const [userAbout, setUserDescription] = useState("");
+  const [userAbout, setAbout] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    const api = new Api({
-      address: "https://nomoreparties.co",
-      groupId: `web_es_05`,
-      token: `3270d03d-8b4c-49a2-869b-f096d27af6a5`,
-    });
     api
       .getUserInfo()
       .then((response) => {
         console.log(response);
         setUserName(response.name);
-        setUserDescription(response.about);
+        setAbout(response.about);
         setUserAvatar(response.avatar);
       })
       .catch((error) => {
