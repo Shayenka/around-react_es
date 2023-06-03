@@ -11,7 +11,7 @@ function Main({
   handleCardClick,
 }) {
   const [userName, setUserName] = useState("");
-  const [userAbout, setAbout] = useState("");
+  const [userAbout, setUserAbout] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
@@ -21,7 +21,7 @@ function Main({
       .then((response) => {
         console.log(response);
         setUserName(response.name);
-        setAbout(response.about);
+        setUserAbout(response.about);
         setUserAvatar(response.avatar);
       })
       .catch((error) => {

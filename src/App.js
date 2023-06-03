@@ -12,7 +12,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isConfirmDeleteCardPopupOpen, setIsConfirmDeleteCardPopupOpen] =
     useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState();
 
   function handleCardClick(cardInfo) {
     setSelectedCard(cardInfo);
@@ -134,7 +134,7 @@ function App() {
             </div>
           </PopupWithForm>
         )}
-        {selectedCard !== null && (
+        {selectedCard && (
           <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
         )}
         {isConfirmDeleteCardPopupOpen && (
