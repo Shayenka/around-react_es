@@ -24,7 +24,10 @@
 @import url(./blocks/element/__image/element__image.css);
 @import url(./blocks/element/__title/element__title.css);
 @import url(./blocks/element/__footer-photo/element__footer-photo.css);
-@import url(./blocks/element/__delete/element__delete.css);
+/* @import url(./blocks/element/__delete/element__delete.css); */
+@import url(./blocks/card__delete-button/card__delete-button.css);
+@import url(./blocks/card__delete-button/_visible/card__delete-button_visible.css);
+@import url(./blocks/card__delete-button/_hidden/card__delete-button_hidden.css);
 /*icon-like*/
 @import url(./blocks/icon-like/icon-like.css);
 @import url(./blocks/icon-like/_black/icon-like_black.css);

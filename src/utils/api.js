@@ -38,6 +38,25 @@ class Api {
       return result;
     });
   }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    const method = isLiked ? "PUT" : "DELETE";
+    return this._useFetch(
+      `https://around.nomoreparties.co/v1/web_es_05/cards/likes/${cardId}`,
+      method
+    ).then((result) => {
+      return result.likes;
+    });
+  }
+
+  deleteCard(cardId) {
+    return this._useFetch(
+      `https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`,
+      `DELETE`
+    ).then((result) => {
+      return result;
+    });
+  }
 }
 
 const api = new Api({

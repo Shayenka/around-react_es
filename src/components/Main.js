@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api from "../utils/api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
 import Card from "./Card.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({
   onEditProfileClick,
@@ -10,24 +11,11 @@ function Main({
   onEditAvatarClick,
   handleCardClick,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userAbout, setUserAbout] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
+  const currentUser = useContext(CurrentUserContext);
+
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((response) => {
-        console.log(response);
-        setUserName(response.name);
-        setUserAbout(response.about);
-        setUserAvatar(response.avatar);
-      })
-      .catch((error) => {
-        console.log("Error al obtener los datos del usuario:", error);
-      });
-
     api
       .getCards()
       .then((response) => {
@@ -38,22 +26,37 @@ function Main({
       });
   }, []);
 
+  function handleCardLike(card) {
+    // Verifica una vez más si a esta tarjeta ya le han dado like
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Envía una petición a la API y obtén los datos actualizados de la tarjeta
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id));
+    });
+  }
   return (
     <main>
       <section className="profile">
         <div className="profile__avatar" onClick={onEditAvatarClick}>
           <img
             className="profile__image"
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Foto de Perfil"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           />
         </div>
 
         <div className="profile__info">
           <div>
-            <h1 className="profile__name">{userName}</h1>
-            <h2 className="profile__occupation">{userAbout}</h2>
+            <h1 className="profile__name">{currentUser.name}</h1>
+            <h2 className="profile__occupation">{currentUser.about}</h2>
           </div>
           <button className="profile__edit" onClick={onEditProfileClick}>
             <img
@@ -74,7 +77,13 @@ function Main({
 
       <section className="elements">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={handleCardClick} />
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
         ))}
       </section>
     </main>
