@@ -1,21 +1,22 @@
+import React, { useContext } from "react";
 import deleteCard from "../images/Papelera.svg";
 import likeCard from "../images/like.svg";
-import React, { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+function Card(props) {
   const currentUser = useContext(CurrentUserContext);
 
   // Verificando si el usuario actual es el propietario de la tarjeta actual
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = props.owner._id === currentUser._id;
+  console.log(isOwn);
 
   // Creando una variable que después establecerás en `className` para el botón eliminar
-  const cardDeleteButtonClassName = `card__delete-button ${
-    isOwn ? "card__delete-button_visible" : "card__delete-button_hidden"
+  const cardDeleteButtonClassName = `element__delete ${
+    isOwn ? "element__delete " : ""
   }`;
 
   // Verifica si el usuario actual le dio "like" a la tarjeta
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = props.likes.some((item) => item._id === currentUser._id);
 
   // Crea una variable que después establecerás en `className` para el botón like
 
@@ -24,41 +25,41 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }`;
 
   function handleClick() {
-    onCardClick(card);
+    props.onCardClick(props);
   }
 
   function handleLikeClick() {
-    onCardLike(card);
+    props.onCardLike(props.card);
   }
 
   function handleDeleteClick() {
-    onCardDelete(card);
+    props.onCardDelete(props.card);
   }
   return (
-    <div className="element" key={card._id}>
+    <div className="element" key={props.card._id}>
       <img
-        className="card__delete-button"
+        className={cardDeleteButtonClassName}
         src={deleteCard}
         alt="Icono de papelera para eliminar"
         onClick={handleDeleteClick}
       />
       <img
         className="element__image"
-        src={card.link}
-        alt={card.name}
-        style={{ backgroundImage: `url(${card.link})` }}
+        src={props.link}
+        alt={props.name}
+        style={{ backgroundImage: `url(${props.link})` }}
         onClick={handleClick}
       />
       <div className="element__footer-photo">
-        <h3 className="element__title">{card.name}</h3>
+        <h3 className="element__title">{props.name}</h3>
         <div className="likes-card">
           <img
-            className="icon-like"
+            className={cardLikeButtonClassName}
             src={likeCard}
             alt="Icono de corazón"
             onClick={handleLikeClick}
           />
-          <span className="likes-card__count">{card.likes.length}</span>
+          <span className="likes-card__count">{props.likes.length}</span>
         </div>
       </div>
     </div>

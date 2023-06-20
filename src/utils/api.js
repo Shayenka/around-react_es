@@ -30,6 +30,16 @@ class Api {
     });
   }
 
+  editUserInfo(name, about) {
+    return this._useFetch(
+      "https://around.nomoreparties.co/v1/web_es_05/users/me",
+      `PATCH`,
+      { name: name, about: about }
+    ).then((result) => {
+      return result;
+    });
+  }
+
   getCards() {
     return this._useFetch(
       "https://around.nomoreparties.co/v1/web_es_05/cards",
@@ -53,6 +63,26 @@ class Api {
     return this._useFetch(
       `https://around.nomoreparties.co/v1/web_es_05/cards/${cardId}`,
       `DELETE`
+    ).then((result) => {
+      return result;
+    });
+  }
+
+  changeAvatarProfile(userAvatar) {
+    return this._useFetch(
+      "https://around.nomoreparties.co/v1/web_es_05/users/me/avatar",
+      `PATCH`,
+      userAvatar
+    ).then((result) => {
+      return result;
+    });
+  }
+
+  addNewCard(name, link) {
+    return this._useFetch(
+      "https://around.nomoreparties.co/v1/web_es_05/cards",
+      `POST`,
+      { name: name, link: link }
     ).then((result) => {
       return result;
     });

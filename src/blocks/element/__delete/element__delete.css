@@ -1,4 +1,4 @@
-/* .element__delete {
+.element__delete {
   max-width: 18px;
   max-height: 19.3px;
   margin-top: 18px;
@@ -9,4 +9,4 @@
 
 .element__delete:hover {
   opacity: 0.6;
-} */
+}
