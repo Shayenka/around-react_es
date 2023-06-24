@@ -6,19 +6,14 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 function Card(props) {
   const currentUser = useContext(CurrentUserContext);
 
-  // Verificando si el usuario actual es el propietario de la tarjeta actual
   const isOwn = props.owner._id === currentUser._id;
   console.log(isOwn);
 
-  // Creando una variable que después establecerás en `className` para el botón eliminar
   const cardDeleteButtonClassName = `element__delete ${
-    isOwn ? "element__delete " : ""
+    isOwn ? "element__delete-visible" : ""
   }`;
 
-  // Verifica si el usuario actual le dio "like" a la tarjeta
   const isLiked = props.likes.some((item) => item._id === currentUser._id);
-
-  // Crea una variable que después establecerás en `className` para el botón like
 
   const cardLikeButtonClassName = `card__like-button ${
     isLiked ? "icon-like_black" : ""

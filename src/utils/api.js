@@ -55,7 +55,7 @@ class Api {
       `https://around.nomoreparties.co/v1/web_es_05/cards/likes/${cardId}`,
       method
     ).then((result) => {
-      return result.likes;
+      return result;
     });
   }
 

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import api from "../utils/api.js";
 import editprofile from "../images/Edit.svg";
 import addcard from "../images/Signo+.svg";
 import Card from "./Card.js";
@@ -67,7 +66,6 @@ function Main(props) {
             name={card.name}
             link={card.link}
             likes={card.likes}
-            // onCardClick={andleCardClick}
             onCardLike={props.onCardLike}
             onCardDelete={props.onCardDelete}
           />

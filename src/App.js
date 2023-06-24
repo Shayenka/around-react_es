@@ -13,8 +13,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isConfirmDeleteCardPopupOpen, setIsConfirmDeleteCardPopupOpen] =
-    useState(false);
+
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState();
 
@@ -59,10 +58,8 @@ function App() {
   }
 
   function handleCardLike(card) {
-    // Verifica una vez más si a esta tarjeta ya le han dado like
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    // Envía una petición a la API y obtén los datos actualizados de la tarjeta
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
@@ -105,7 +102,6 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsConfirmDeleteCardPopupOpen(false);
     setSelectedCard(null);
   }
 
@@ -146,22 +142,6 @@ function App() {
               onAddPlace={handleAddPlaceSubmit}
             />
           )}
-
-          {/* {selectedCard && (
-            <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
-          )}
-          {isConfirmDeleteCardPopupOpen && (
-            <PopupWithForm
-              name="confirmDeleteCard"
-              title="¿Estás seguro?"
-              submitButtonText="Sí"
-              isOpen={isConfirmDeleteCardPopupOpen}
-              onClose={closeAllPopups}
-            >
-              {" "}
-              <div></div>
-            </PopupWithForm>
-          )}  */}
           <Footer />
         </CurrentUserContext.Provider>
       </div>
@@ -170,14 +150,3 @@ function App() {
 }
 
 export default App;
-
-// useEffect(() => {
-//   api
-//     .getCards()
-//     .then((response) => {
-//       setSelectedCard(response);
-//     })
-//     .catch((error) => {
-//       console.log("Error al obtener los datos de las tarjetas:", error);
-//     });
-// }, []);

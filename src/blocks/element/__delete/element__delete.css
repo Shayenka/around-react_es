@@ -5,8 +5,13 @@
   margin-left: 249px;
   position: absolute;
   z-index: 2;
+  display: none;
 }
 
 .element__delete:hover {
   opacity: 0.6;
+}
+
+.element__delete-visible {
+  display: block;
 }
