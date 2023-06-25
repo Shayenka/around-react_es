@@ -1,12 +1,13 @@
 import "../index.css";
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import EditProfilePopup from "./EditProfilePopup.js";
-import EditAvatarPopup from "./EditAvatarPopup.js";
-import AddPlacePopup from "./AddPlacePopup";
-import api from "../utils/api";
+import Header from "../components/Header";
+import Main from "../components/Main";
+import Footer from "../components/Footer";
+import EditProfilePopup from "../components/EditProfilePopup.js";
+import EditAvatarPopup from "../components/EditAvatarPopup.js";
+import AddPlacePopup from "../components/AddPlacePopup.js";
+import ImagePopup from "./ImagePopup";
+import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
@@ -23,7 +24,6 @@ function App() {
     api
       .getUserInfo()
       .then((response) => {
-        console.log(response);
         setCurrentUser(response);
       })
       .catch((error) => {
@@ -114,7 +114,7 @@ function App() {
             onEditProfileClick={handleEditProfileClick}
             onAddPlaceClick={handleAddPlaceClick}
             onEditAvatarClick={handleEditAvatarClick}
-            handleCardClick={handleCardClick}
+            onCardClick={handleCardClick}
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
@@ -141,6 +141,9 @@ function App() {
               onClose={closeAllPopups}
               onAddPlace={handleAddPlaceSubmit}
             />
+          )}
+          {selectedCard && (
+            <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
           )}
           <Footer />
         </CurrentUserContext.Provider>
