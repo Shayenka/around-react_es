@@ -7,7 +7,6 @@ function Card(props) {
   const currentUser = useContext(CurrentUserContext);
 
   const isOwn = props.owner._id === currentUser._id;
-  console.log(isOwn);
 
   const cardDeleteButtonClassName = `element__delete ${
     isOwn ? "element__delete-visible" : ""
@@ -20,7 +19,7 @@ function Card(props) {
   }`;
 
   function handleClick() {
-    props.onCardClick(props);
+    props.onCardClick(props.card);
   }
 
   function handleLikeClick() {
